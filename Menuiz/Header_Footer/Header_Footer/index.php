@@ -11,18 +11,30 @@
 </head>
 <body>   
  <?php
+
+ 
  // HEADER
+
  include "header.php";
+
+
+ 
+ if (isset($_SESSION["name"])) {
+     echo '<H1 class="form-legend">Bienvenue ' . $_SESSION["name"] . ' !</H1>';
+     echo '<br /><br /><a href="logout.php">Se déconnecter</a>';
+ } else {
+     header("location:pdo_login.php");
+ }
+
+
     echo "<main>";
 
             echo '<div id="admin-box" class="box-container">';
             echo '<div class="adminPage">';
             echo '<div class="fold-container shadow form-admin">';
-                 
-                    echo "<H1 class='form-legend'>Bienvenue Administrateur</H1>";
-                  
+            echo "<H1 class='form-legend'>Bienvenue Administrateur</H1>";
             echo '</div>';
-            echo '</div>'; 
+            echo '</div>';
             echo '<div class="adminPage">';
             echo '<div  class="fold-container shadow form-admin">';
             echo '</div>';
@@ -30,86 +42,39 @@
             echo '</div>';
             echo "</main>";
 
+      
+
 
 // Zone test
-include "panier.php";
+?>
 
-        echo '<div class="zone-produits">';
-        
-            echo '<div class="produits">';
-            echo '<div class ="container-image">';
-                    echo '<img src="https://ceklo.fr/wp-content/uploads/2020/04/Portail-aluminium-battant-BRAVO-7016-ceklo.jpg"/>';
-            echo '</div> ';
-            echo '<p class="titre"> Produit A </p>';
-            echo '<p class="prix"> Prix </p>';
+
+    <form action="page_recherche.php" method="post" class="searchZone">
            
-        echo '<a href="panier.php?action=ajout&amp;l=LIBELLEPRODUIT&amp;q=QUANTITEPRODUIT&amp;p=PRIXPRODUIT" onclick="window.open(this.href, \'\', 
-        \'toolbar=no, location=no, directories=no, status=yes, scrollbars=yes, resizable=yes, copyhistory=no, width=600, height=350\'); return false;"  class="add-to-cart btn btn-primary">Ajouter au panier</a>';
-        echo '</div>';
+            
+            <input type="text" value="" id="searchBar" name="search" />
+           
+            <input type="submit" name="login" class="btn btn-info" value="Recherche"/>
+        </form>
 
-        echo '<div class="produits">';
-        echo '<div class ="container-image">';
-                echo '<img src="https://ceklo.fr/wp-content/uploads/2020/04/Portail-aluminium-battant-BRAVO-7016-ceklo.jpg"/>';
-        echo '</div> ';
-        echo '<p class="titre"> Produit A </p>';
-        echo '<p class="prix"> Prix </p>';
-        echo '<a href="" class="add-to-cart btn btn-primary">Ajouter au panier</a>';
-    
-    echo '</div>';
 
-    echo '<div class="produits">';
-    echo '<div class ="container-image">';
-            echo '<img src="https://ceklo.fr/wp-content/uploads/2020/04/Portail-aluminium-battant-BRAVO-7016-ceklo.jpg"/>';
-    echo '</div> ';
-    echo '<p class="titre"> Produit A </p>';
-    echo '<p class="prix"> Prix </p>';
-    echo '<a href="" class="add-to-cart btn btn-primary">Ajouter au panier</a>';
 
-echo '</div>';
 
-echo '<div class="produits">';
-echo '<div class ="container-image">';
-        echo '<img src="https://ceklo.fr/wp-content/uploads/2020/04/Portail-aluminium-battant-BRAVO-7016-ceklo.jpg"/>';
-echo '</div> ';
-echo '<p class="titre"> Produit A </p>';
-echo '<p class="prix"> Prix </p>';
-echo '<a href="" class="add-to-cart btn btn-primary">Ajouter au panier</a>';
 
-echo '</div>';
 
-echo '<div class="produits">';
-echo '<div class ="container-image">';
-        echo '<img src="https://ceklo.fr/wp-content/uploads/2020/04/Portail-aluminium-battant-BRAVO-7016-ceklo.jpg"/>';
-echo '</div> ';
-echo '<p class="titre"> Produit A </p>';
-echo '<p class="prix"> Prix </p>';
-echo '<a href="" class="add-to-cart btn btn-primary">Ajouter au panier</a>';
+<?php
 
-echo '</div>';
 
-echo '<div class="produits">';
-echo '<div class ="container-image">';
-        echo '<img src="https://ceklo.fr/wp-content/uploads/2020/04/Portail-aluminium-battant-BRAVO-7016-ceklo.jpg"/>';
-echo '</div> ';
-echo '<p class="titre"> Produit A </p>';
-echo '<p class="prix"> Prix </p>';
-echo '<a href="" class="add-to-cart btn btn-primary">Ajouter au panier</a>';
+        echo '<div id="zone-produits">';
 
-echo '</div>';
-
-echo '<div class="produits">';
-echo '<div class ="container-image">';
-        echo '<img src="https://ceklo.fr/wp-content/uploads/2020/04/Portail-aluminium-battant-BRAVO-7016-ceklo.jpg"/>';
-echo '</div> ';
-echo '<p class="titre"> Produit A </p>';
-echo '<p class="prix"> Prix </p>';
-echo '<a href="" class="add-to-cart btn btn-primary">Ajouter au panier</a>';
-
-echo '</div>';
-
+include "produits.php";
 
        
-echo '</div>;';
+        echo '</div>;';
+
+
+
+
    // Fin Zone Test
    
 
