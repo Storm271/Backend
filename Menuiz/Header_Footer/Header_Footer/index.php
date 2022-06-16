@@ -1,3 +1,8 @@
+<?php session_start();
+// include 'DBController.php';
+// $db_handle = new DBController();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -9,21 +14,34 @@
     <link rel="stylesheet" href="CSS/style.css">
     <title>Accueil </title>
 </head>
-<body>   
+<body >   
+    
  <?php
 
  
  // HEADER
-
+ 
+ 
  include "header.php";
+ if ($_SESSION["connecter"] != "yes") {
+     header("location:login.php");
+     exit();
+ }
+if (date("H") < 18) {
+    $bienvenue = "Bonjour et bienvenue "  .
+$_SESSION["prenom_nom"];
+} else {
+    $bienvenue = "Bonsoir et bienvenue "  .
+$_SESSION["prenom_nom"];
+}
+?>
+<h2 class="bienvenue"><?php  echo  $bienvenue  ?></h2>
 
-
+<?php
  
  if (isset($_SESSION["name"])) {
      echo '<H1 class="form-legend">Bienvenue ' . $_SESSION["name"] . ' !</H1>';
      echo '<br /><br /><a href="logout.php">Se déconnecter</a>';
- } else {
-     header("location:pdo_login.php");
  }
 
 
@@ -43,12 +61,9 @@
             echo "</main>";
 
       
-
-
-// Zone test
 ?>
 
-
+<a class="voirPanier" href="panier.php"> Voir panier </a>
     <form action="page_recherche.php" method="post" class="searchZone">
            
             
@@ -57,20 +72,17 @@
             <input type="submit" name="login" class="btn btn-info" value="Recherche"/>
         </form>
 
+        
 
 
-
-
-
+<!-- // Zone test -->
+    </div>
 <?php
-
 
         echo '<div id="zone-produits">';
 
 include "produits.php";
 
-       
-        echo '</div>;';
 
 
 
