@@ -1,27 +1,45 @@
 <?php
 session_start();
 include("infos.php");
+include('model_user.php');
 @$valider = $_POST["inscrire"];
 $erreur = "";
 if (isset($valider)) {
-if (empty($nom)) $erreur = "Le chanmps nom est obligatoire !";
-elseif (empty($prenom)) $erreur = "Le chanmps prénom est obligatoire !";
-elseif (empty($pseudo)) $erreur = "Le chanmps Pseudo est obligatoire !";
-elseif (empty($password)) $erreur = "Le chanmps mot de passe est obligatoire !";
-elseif ($password != $passwordConf) $erreur = "Mots de passe differents !";
-else {
-include("connexion.php");
-$verify_pseudo = $pdo->prepare("select USR_ID from t_d_user_usr where username=? limit 1");
-$verify_pseudo->execute(array($pseudo));
-$user_pseudo = $verify_pseudo->fetchAll();
-if (count($user_pseudo) > 0)
-$erreur = "Pseudo existe déjà!";
-else {
-$ins = $pdo->prepare("insert into t_d_user_usr(USR_LASTNAME,USR_FIRSTNAME,username,USR_PASSWORD, USR_MAIL) values(?,?,?,?,?)");
-if ($ins->execute(array($nom, $prenom, $pseudo, md5($password), $email)))
-header("location:login.php");
-     }
-   }
+    if (empty($nom)) {
+        $erreur = "Le champs nom est obligatoire !";
+    } elseif (empty($prenom)) {
+        $erreur = "Le champs prénom est obligatoire !";
+    } elseif (empty($pseudo)) {
+        $erreur = "Le champs Pseudo est obligatoire !";
+    } elseif (empty($email)) {
+        $erreur = "Le champs Email est obligatoire !";
+    } elseif (empty($password)) {
+        $erreur = "Le champs mot de passe est obligatoire !";
+    } elseif ($password != $passwordConf) {
+        $erreur = "Mots de passe differents !";
+    } else {
+        include("connexion.php");
+        $verify_pseudo = $pdo->prepare("select USR_ID from t_d_user_usr where username=? limit 1");
+        $verify_pseudo->execute(array($pseudo));
+        $user_pseudo = $verify_pseudo->fetchAll();
+        if (count($user_pseudo) > 0) {
+            $erreur = "Pseudo existe déjà!";
+        }
+
+
+        /* Vérifier si l'e-mail est déjà dans la base de données. */
+        $verify_email = $pdo->prepare("select USR_ID from t_d_user_usr where USR_MAIL=? limit 1");
+        $verify_email->execute(array($email));
+        $user_email = $verify_email->fetchAll();
+        if (count($user_email) > 0) {
+            $erreur = "Email déjà existante !";
+        } else {
+            // $ins = $pdo->prepare("insert into t_d_user_usr(USR_LASTNAME,USR_FIRSTNAME,username,USR_PASSWORD, USR_MAIL) values(?,?,?,?,?)");
+            // if ($ins->execute(array($nom, $prenom, $pseudo, md5($password), $email)))
+            createUser($nom, $prenom, $email, md5($password), $pseudo);
+            header("location:login.php");
+        }
+    }
 }
 ?>
 <!DOCTYPE  html>

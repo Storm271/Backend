@@ -5,19 +5,18 @@ include("infos.php");
 @$valider = $_POST["valider"];
 $erreur = "";
 if (isset($valider)) {
-    include("connexion.php");
-    $verify = $pdo->prepare("select * from t_d_user_usr where username=? and USR_PASSWORD=? limit 1");
-    $verify->execute(array($pseudo, $pass_crypt));
-    $user = $verify->fetchAll();
-    if (count($user) > 0) {
-        $_SESSION["prenom_nom"] = $pseudo;
-        // ucfirst(strtolower($user[0]["prenom"])) .
-        // " "  .  strtoupper($user[0]["nom"]);
-        $_SESSION["connecter"] = "yes";
-        header("location:index.php");
-    } else {
-        $erreur = "Mauvais login ou mot de passe!";
-    }
+include("connexion.php");
+$verify = $pdo->prepare("select * from t_d_user_usr where username=? and USR_PASSWORD=? limit 1");
+$verify->execute(array($pseudo, $pass_crypt));
+$user = $verify->fetchAll();
+if (count($user) > 0) {
+$_SESSION["prenom_nom"] = $pseudo;
+// ucfirst(strtolower($user[0]["prenom"])) .
+// " "  .  strtoupper($user[0]["nom"]);
+$_SESSION["connecter"] = "yes";
+header("location:session.php");
+} else
+$erreur = "Mauvais login ou mot de passe!";
 }
 ?>
  
