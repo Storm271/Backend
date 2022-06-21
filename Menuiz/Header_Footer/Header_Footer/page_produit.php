@@ -2,15 +2,16 @@
  
 session_start();
 if ($_SESSION["connecter"] != "yes") {
-header("location:login.php");
-exit();
+    header("location:login.php");
+    exit();
 }
-if (date("H") < 18)
-$bienvenue = "Bonjour et bienvenue "  .
+if (date("H") < 18) {
+    $bienvenue = "Bonjour et bienvenue "  .
 $_SESSION["prenom_nom"];
-else
-$bienvenue = "Bonsoir et bienvenue "  .
+} else {
+    $bienvenue = "Bonsoir et bienvenue "  .
 $_SESSION["prenom_nom"];
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -31,7 +32,6 @@ $_SESSION["prenom_nom"];
 
  include "header.php";
 
- include "panier.php";
 
  echo '<div class="zone-produits">';
 

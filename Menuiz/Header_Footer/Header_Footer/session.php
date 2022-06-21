@@ -21,6 +21,8 @@ $_SESSION["prenom_nom"];
 <head>
 <meta  charset="utf-8"  />
 <title>Accueil</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+        integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link rel="stylesheet" href="CSS/style.css">
 <style>
 * {
@@ -56,8 +58,9 @@ text-decoration: underline;
 
  $produitStatement->execute();
  $produits = $produitStatement->fetchAll();
-
+ echo "<div class='zone-produits'>";
  include"produits.php";
+ echo "</div>";
 
 //  echo '<div id="product-box" class="box-container">';
 //     echo '<h1 class="title"> Nos produits : </h1><br>';
@@ -80,5 +83,13 @@ text-decoration: underline;
 //             echo '</form>'."\n";
 //     }
     include"footer.php"?>
+
+
+
+
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+        integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
 </body>
 </html>

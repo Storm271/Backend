@@ -102,7 +102,7 @@
                 // ucfirst(strtolower($user[0]["prenom"])) .
                 // " "  .  strtoupper($user[0]["nom"]);
                 $_SESSION["connecter"] = "yes";
-                header("location:session.php");
+                header("location:index.php");
             } else {
                 $erreur = "Mauvais login ou mot de passe!";
             }

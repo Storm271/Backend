@@ -563,11 +563,7 @@ th {
     border-color: white;
 }
 
-#zone-produits {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+
 
 .produits {
     display: flex;
@@ -695,4 +691,9 @@ div.image .selected {
     margin-left: 50px;
     font-size: xx-large;
     font-weight: bold;
+}
+.zone-produits {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }

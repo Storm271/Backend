@@ -68,6 +68,5 @@ session_start();
 include("infos.php");
 include('model_user.php');
 verifUser();
-
 ?>
 </html>
