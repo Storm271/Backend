@@ -1,20 +1,21 @@
 <?php
-    
-    function getDatabaseConnexion()
-    {
-        try {
-            $user = "root";
-            $pass = "";
-            $pdo = new PDO('mysql:host=localhost;dbname=menuiz', $user, $pass);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $pdo;
-        } catch (PDOException $e) {
-            print "Erreur !: " . $e->getMessage() . "<br/>";
-            die();
-        }
+    $pdo;
+    if (!isset($pdo)) {
+        $pdo=getDatabaseConnexion();
     }
-
-    
+     function getDatabaseConnexion()
+     {
+         try {
+             $user = "root";
+             $pass = "";
+             $pdo = new PDO('mysql:host=localhost;dbname=menuiz', $user, $pass);
+             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+             return $pdo;
+         } catch (PDOException $e) {
+             print "Erreur !: " . $e->getMessage() . "<br/>";
+             die();
+         }
+     }
     // récupere tous les types de paiements
     function getAllPaymentTypes()
     {

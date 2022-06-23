@@ -1,6 +1,10 @@
 <?php
  
 session_start();
+include "model_shipper.php";
+include "model_paymentType.php";
+
+
 if ($_SESSION["connecter"] != "yes") {
     header("location:login.php");
     exit();
@@ -67,18 +71,32 @@ $_SESSION["prenom_nom"];
         <input  type="text"  name="nom"  placeholder="Nom"  /><br  />
 
         <form action="#">
-      <label for="lang">Language</label>
-      <select name="languages" id="lang">
-        <option value="javascript">JavaScript</option>
-        <option value="php">PHP</option>
-        <option value="java">Java</option>
-        <option value="golang">Golang</option>
-        <option value="python">Python</option>
-        <option value="c#">C#</option>
-        <option value="C++">C++</option>
-        <option value="erlang">Erlang</option>
+      <label for="shippers">Transporteur</label>
+      <select name="shippers" id="shippers">
+      <option></option>
+        <?php
+        $shippers = getAllShippers();
+        foreach ($shippers as $shipper) {
+            echo '<option value="'.$shipper['ETY_ID'].'">'.$shipper['ETY_WORDING'].'</option>';
+        }
+        ?>        
       </select>
       <input type="submit" value="Submit" />
+
+      <label for="paiement">Moyen de paiement</label>
+      <select name="paiement" id="paiements">
+      <option></option>
+        <?php
+        $paiementTypes = getAllPaymentTypes();
+        foreach ($paiementTypes as $paiementType) {
+            echo '<option value="'.$paiementType['PMT_ID'].'">'.$paiementTypes['PMT_WORDING'].'</option>';
+        }
+        ?>        
+      </select>
+      <input type="submit" value="Submit" />
+
+
+
 </form>
 
 

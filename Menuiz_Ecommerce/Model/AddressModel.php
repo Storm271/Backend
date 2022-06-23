@@ -1,75 +1,11 @@
 <?php
-    
-    function getDatabaseConnexion()
-    {
-        try {
-            $user = "root";
-            $pass = "";
-            $pdo = new PDO('mysql:host=localhost;dbname=menuiz', $user, $pass);
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $pdo;
-        } catch (PDOException $e) {
-            print "Erreur !: " . $e->getMessage() . "<br/>";
-            die();
-        }
-    }
-
-    
-    // récupere toutes les adresses
-    function getAllAdresses()
-    {
-        $con = getDatabaseConnexion();
-        $requete = 'SELECT * from t_d_address_adr';
-        $rows = $con->query($requete);
-        return $rows;
-    }
-
-    // creer une adresse
-    function createAdress($prenom, $nom, $adresse1, $adresse2, $adresse3, $zipcode, $ville, $pays, $email, $telephone)
-    {
-        try {
-            $con = getDatabaseConnexion();
-            $sql = "INSERT INTO t_d_address_adr (ADR_FIRSTNAME, ADR_LASTNAME, ADR_LINE1, ADR_LINE2, ADR_LINE3, ADR_ZIPCODE, ADR_CITY, ADR_COUNTRY, ADR_MAIL, ADR_PHONE) 
-					VALUES ('$prenom', '$nom', '$adresse1', '$adresse2', '$adresse3', '$zipcode', '$ville', '$pays', '$email', '$telephone' )";
-            $con->exec($sql);
-        } catch (PDOException $e) {
-            echo $sql . "<br>" . $e->getMessage();
-        }
-    }
-
-    //recupere une adresse
-    function readAdress($id)
-    {
-        $con = getDatabaseConnexion();
-        $requete = "SELECT * from t_d_address_adr where ADR_ID = '$id' ";
-        $stmt = $con->query($requete);
-        $row = $stmt->fetchAll();
-        if (!empty($row)) {
-            return $row[0];
-        }
-    }
-
-  
-    // suprime une adresse
-    function deleteAdress($id)
-    {
-        try {
-            $con = getDatabaseConnexion();
-            $requete = "DELETE from t_d_address_adr where ADR_ID = '$id' ";
-            $stmt = $con->query($requete);
-        } catch (PDOException $e) {
-            echo $sql . "<br>" . $e->getMessage();
-        }
-    }
-
-
-    class ModeleAddress
+require_once __DIR__ . '/../include/init.php';
+class ModeleAddress
 {
     private $idc;
     private function connexion()
     {
-
-        $this->idc = new PDO("mysql:host=localhost;  dbname=menuiz", 'root', '');
+        $this->idc = new PDO("mysql:host=localhost;  dbname=menuiz2", 'root', '');
     }
 
     //Fonction pour afficher une adresse par rapport à son identifiant
@@ -125,11 +61,56 @@
     }
 
 
+    //Fonction pour vérifier qu'une adresse saisie n'existe pas déjà pour l'utilisateur
+    public function VerifAddressByUser($usrid, $adrSaisie)
+    {
+        $this->connexion();
+        $query="
+         select adr_id
+         from t_d_address_adr adr 
+         inner join t_d_orderheader_ohr ohr on adr.ADR_ID=ohr.ADR_ID_FAC 
+         where usr_id=" . $usrid . " and adr_firstname + ' ' + adr_lastname  + CHAR(13) +
+         adr_line1 + CHAR(13) + adr_line2 + CHAR(13) +
+         adr_line3 + CHAR(13) + 
+         adr_zipcode + ' ' + adr_city + CHAR(13)
+         + adr_country= '". $adrSaisie . "' 
+         union
+         select adr_id
+         from t_d_address_adr adr 
+         inner join t_d_orderheader_ohr ohr on adr.ADR_ID=ohr.ADR_ID_liv  
+         where  USR_ID=" . $usrid . "  and adr_firstname + ' ' + adr_lastname  + CHAR(13) +
+         adr_line1 + CHAR(13) + adr_line2 + CHAR(13) +
+         adr_line3 + CHAR(13) + 
+         adr_zipcode + ' ' + adr_city + CHAR(13)
+         + adr_country= '". $adrSaisie . "' 
+         union 
+         select adr.adr_id
+         from t_d_address_adr adr 
+         inner join t_d_user_usr usr on adr.ADR_ID=usr.ADR_ID  
+         where  USR_ID= " . $usrid . "  and adr_firstname + ' ' + adr_lastname  + CHAR(13) +
+         adr_line1 + CHAR(13) + adr_line2 + CHAR(13) +
+         adr_line3 + CHAR(13) + 
+         adr_zipcode + ' ' + adr_city + CHAR(13)
+         + adr_country= '". $adrSaisie . "';";
+        $res = $this->idc->prepare($query);
+        $res->execute();
+        return $res;
+    }
 
-    public function InsertAddress($firstname, $lastname,
-     $line1, $line2,$line3,
-     $zipcode,$city,$country,
-     $mail,$phone)
+
+
+    public function InsertAddress(
+        $firstname,
+        $lastname,
+        $line1,
+        $line2,
+        $line3,
+        $zipcode,
+        $city,
+        $country,
+        $mail,
+        $phone
+    )
     {
         $this->connexion();
         $query = 'INSERT INTO T_D_ADDRESS_ADR
@@ -154,7 +135,7 @@
             :country ,
             :mail,
             :phone 
-        )'; 
+        )';
 
         $stmt = $this->idc->prepare($query);
         $stmt->execute([
@@ -171,9 +152,7 @@
         ]);
 
         // on retourne le dernier id
-        return $id = $this->idc->lastInsertId();;
+        return $id = $this->idc->lastInsertId();
+        ;
     }
-
-  
 }
-?>
