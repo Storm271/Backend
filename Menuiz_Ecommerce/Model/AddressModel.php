@@ -23,38 +23,38 @@ class ModeleAddress
     {
         $this->connexion();
         $query="
-        select ohr.usr_id,
-            adr.*,
-            adr_firstname + ' ' + adr_lastname  + CHAR(13) +
-            adr_line1 + CHAR(13) + adr_line2 + CHAR(13) +
-            adr_line3 + CHAR(13) + 
-            adr_zipcode + ' ' + adr_city + CHAR(13)
-            + adr_country as completadress
-        from t_d_address_adr adr 
-        inner join t_d_orderheader_ohr ohr on adr.ADR_ID=ohr.ADR_ID_FAC 
-        where usr_id=" . $usrid . "
-        union
-        select ohr.usr_id,
-            adr.*,
-            adr_firstname + ' ' + adr_lastname  + CHAR(13) +
-            adr_line1 + CHAR(13) + adr_line2 + CHAR(13) +
-            adr_line3 + CHAR(13) + 
-            adr_zipcode + ' ' + adr_city + CHAR(13)
-            + adr_country as completadress
-        from t_d_address_adr adr 
-        inner join t_d_orderheader_ohr ohr on adr.ADR_ID=ohr.ADR_ID_liv  
-        where  USR_ID=" . $usrid . "
-        union 
-        select usr.usr_id, 
-            adr.*,
-            adr_firstname + ' ' + adr_lastname  + CHAR(13) +
-            adr_line1 + CHAR(13) + adr_line2 + CHAR(13) +
-            adr_line3 + CHAR(13) + 
-            adr_zipcode + ' ' + adr_city + CHAR(13)
-            + adr_country as completadress
-        from t_d_address_adr adr 
-        inner join t_d_user_usr usr on adr.ADR_ID=usr.ADR_ID  
-        where  USR_ID= " . $usrid . ";";
+      select ohr.usr_id,
+          adr.*,
+          concat( adr_firstname , ' ' , adr_lastname  , CHAR(13) ,
+          adr_line1 , CHAR(13) , IFNULL(adr_line2,'') , CHAR(13) ,
+          IFNULL(adr_line3,'') , CHAR(13) , 
+          adr_zipcode , ' ' , adr_city , CHAR(13)
+          , adr_country) as completadress
+      from t_d_address_adr adr 
+      inner join t_d_orderheader_ohr ohr on adr.ADR_ID=ohr.ADR_ID_FAC 
+      where usr_id=" . $usrid . "
+      union
+      select ohr.usr_id,
+          adr.*,
+          concat( adr_firstname , ' ' , adr_lastname  , CHAR(13) ,
+          adr_line1 , CHAR(13) , IFNULL(adr_line2,'') , CHAR(13) ,
+          IFNULL(adr_line3,'') , CHAR(13) , 
+          adr_zipcode , ' ' , adr_city , CHAR(13)
+          , adr_country) as completadress
+      from t_d_address_adr adr 
+      inner join t_d_orderheader_ohr ohr on adr.ADR_ID=ohr.ADR_ID_liv  
+      where  USR_ID=" . $usrid . "
+      union 
+      select usr.usr_id, 
+          adr.*,
+          concat( adr_firstname , ' ' , adr_lastname  , CHAR(13) ,
+          adr_line1 , CHAR(13) , IFNULL(adr_line2,'') , CHAR(13) ,
+          IFNULL(adr_line3,'') , CHAR(13) , 
+          adr_zipcode , ' ' , adr_city , CHAR(13)
+          , adr_country) as completadress 
+      from t_d_address_adr adr 
+      inner join t_d_user_usr usr on adr.ADR_ID=usr.ADR_ID  
+      where  USR_ID= " . $usrid . ";";
         $res = $this->idc->prepare($query);
         $res->execute();
         return $res;
@@ -110,8 +110,7 @@ class ModeleAddress
         $country,
         $mail,
         $phone
-    )
-    {
+    ) {
         $this->connexion();
         $query = 'INSERT INTO T_D_ADDRESS_ADR
         ( 
