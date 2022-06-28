@@ -4,9 +4,10 @@
 require_once __DIR__ . '/Include/init.php';
 require __DIR__ . '/layout/top.php';
 require __DIR__ .'/Model/infosRetourModel.php';
-$produitModel=new  ModeleinfosRetour(0);
-$produitStatement=$produitModel->RecupProduit($_GET['idProduit']);
+$produitModel=new ModeleinfosRetour(0);
+$produitStatement=$produitModel->RecupProduit($_GET['id']);
 $produit = $produitStatement->fetchAll();
+
 
 //  $id = null; if (!empty($_GET['PRD_ID'])) {
 //      $id = $_REQUEST['PRD_ID'];
@@ -58,12 +59,13 @@ $produit = $produitStatement->fetchAll();
 
 <br />
 <div class="control-group">
-<label class="control-label">Name</label>
+<label class="control-label">N° de dossier</label>
 
 <br />
 <div class="controls">
 <label class="checkbox">
-<?php echo $data['PRD_DESCRIPTION']; ?>
+<?php
+ echo '<p class="description">'.$produit[0]['SVF_ID'].'</p>'; ?>
 </label>
 </div>
 <p>
@@ -74,12 +76,12 @@ $produit = $produitStatement->fetchAll();
 
 <br />
 <div class="control-group">
-<label class="control-label">Firstname</label>
+<label class="control-label">Status</label>
 
 <br />
 <div class="controls">
 <label class="checkbox">
-<?php echo $data['PRD_GUARANTEE']; ?>
+<?php  echo '<p class="description">'.$produit[0]['SVL_STATUS'].'</p>'; ?>
 </label>
 </div>
 <p>
@@ -90,12 +92,12 @@ $produit = $produitStatement->fetchAll();
 
 <br />
 <div class="control-group">
-<label class="control-label">Email Address</label>
+<label class="control-label">Date de Création</label>
 
 <br />
 <div class="controls">
 <label class="checkbox">
-<?php echo $data['PRD_PRICE']; ?>
+<?php  echo '<p class="description">'.$produit[0]['SVF_CREATIONTIME'].'</p>'; ?>
 </label>
 </div>
 <p>
@@ -103,38 +105,56 @@ $produit = $produitStatement->fetchAll();
 </div>
 <p>
 
+
+<br />
+<div class="control-group">
+<label class="control-label">N° de commande</label>
+
+<br />
+<div class="controls">
+<label class="checkbox">
+<?php  echo '<p class="description">'.$produit[0]['OHR_NUMBER'].'</p>'; ?>
+</label>
+</div>
+<p>
+
+</div>
+
+<p>
+
+
+<br />
+<div class="control-group">
+<label class="control-label">N° Produit</label>
+
+<br />
+<div class="controls">
+<label class="checkbox">
+<?php
+echo '<p class="description">'.$produit[0]['SVF_Product'].'</p>'; ?>
+</label>
+</div>
+<p>
+
+</div>
+<p>
+
+<br />
+<div class="control-group">
+<label class="control-label">Nom du technicien en charge</label>
+
+<br />
+<div class="controls">
+<label class="checkbox">
+<?php
+echo '<p class="description">'.$produit[0]['nom'].'</p>'; ?>
+</label>
+</div>
+<p>
+
+</div>
+<p>
 <!-- 
-<br />
-<div class="control-group">
-<label class="control-label">Phone</label>
-
-<br />
-<div class="controls">
-<label class="checkbox">
-<?php echo $data['tel']; ?>
-</label>
-</div>
-<p>
-
-</div>
-<p>
-
-
-<br />
-<div class="control-group">
-<label class="control-label">Pays</label>
-
-<br />
-<div class="controls">
-<label class="checkbox">
-<?php echo $data['pays']; ?>
-</label>
-</div>
-<p>
-
-</div>
-<p>
-
 
 <br />
 <div class="control-group">
@@ -186,7 +206,7 @@ $produit = $produitStatement->fetchAll();
 
 <br />
 <div class="form-actions">
-<a class="btn" href="tableau.php">Back</a>
+<a class="btn btn-secondary" href="tableau.php">Back</a>
 </div>
 <p>
 
@@ -202,5 +222,6 @@ $produit = $produitStatement->fetchAll();
 </div>
 <p>
 <!-- /container -->
+<?php require __DIR__ . '/layout/bottom.php'; ?>
     </body>
 </html>
