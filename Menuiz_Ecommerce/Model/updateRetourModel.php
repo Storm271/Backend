@@ -15,10 +15,10 @@ class ModeleUpdateRetour
     {
         $this->connexion();
         $query = "UPDATE t_d_savfile_svf 
-        SET SVL_STATUS = '$statu',
-        Usr_ID = '$identifiant' ,
-        SVF_COMM ='$commentaire'
-        where SVF_Product= 6"
+        SET SVL_STATUS = :statu,
+        Usr_ID = :id ,
+        SVF_COMM = :commentaire
+        where SVF_ID= 1"
 ;
 
         $stmt = $this->idc->prepare($query);

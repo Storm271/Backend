@@ -131,7 +131,7 @@ $produit = $produitStatement->fetchAll();
 <div class="controls">
 <label class="checkbox">
 <?php
-echo '<p class="description">'.$produit[0]['SVF_Product'].'</p>'; ?>
+echo '<p class="description">'.$produit[0]['PRD_DESCRIPTION'].'</p>'; ?>
 </label>
 </div>
 <p>
