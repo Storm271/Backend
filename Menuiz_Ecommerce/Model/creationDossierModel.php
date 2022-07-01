@@ -51,11 +51,15 @@ class dossier
         return $res;
     }
 
+
+
+
     public function InsertDossier(
         // $commentaire,
         $date,
         $idTech,
-        $idCommande
+        $idCommande,
+        $produit
         // $idStatus
     ) {
         $this->connexion();
@@ -65,12 +69,14 @@ class dossier
         SVF_CREATIONTIME,
         USR_ID,
         OHR_ID,
+        SVF_Product,
         SVL_ID)
          VALUES (
             -- :commentaire,
             :dates,
             :idTech,
             :idCommande,
+            :produit,
             1
             
         )'; //par défaut on le met en type utilisateur Technicien S.A.V
@@ -80,7 +86,8 @@ class dossier
             // ':commentaire' => $commentaire,
             ':dates' => $date,
             ':idTech' => $idTech,
-            ':idCommande' => $idCommande
+            ':idCommande' => $idCommande,
+            ':produit' => $produit
         ]);
 
         // on retourne le dernier id

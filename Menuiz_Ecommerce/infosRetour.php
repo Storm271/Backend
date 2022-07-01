@@ -154,54 +154,6 @@ echo '<p class="description">'.$produit[0]['nom'].'</p>'; ?>
 
 </div>
 <p>
-<!-- 
-
-<br />
-<div class="control-group">
-<label class="control-label">Metier</label>
-
-<br />
-<div class="controls">
-<label class="checkbox">
-<?php echo $data['metier']; ?>
-</label>
-</div>
-<p>
-
-</div>
-<p>
-
-
-<br />
-<div class="control-group">
-<label class="control-label">Url</label>
-
-<br />
-<div class="controls">
-<label class="checkbox">
-<?php echo $data['url']; ?>
-</label>
-</div>
-<p>
-
-</div>
-<p>
-
-
-<br />
-<div class="control-group">
-<label class="control-label">Comment</label>
-
-<br />
-<div class="controls">
-<label class="checkbox">
-<?php echo $data['comment']; ?>
-</label>
-</div>
-<p>
-
-</div>
-<p> -->
 
 
 <br />

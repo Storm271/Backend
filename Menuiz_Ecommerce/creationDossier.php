@@ -4,7 +4,7 @@ require __DIR__ .'/Model/creationDossierModel.php';
 
 
 $errors = [];
-$commentaire = $date = $ip = $idTech = $idCommande = $idStatus = '';
+$produit = $date = $ip = $idTech = $idCommande = $idStatus = '';
 
 $userM=new dossier();
 if (!empty($_POST)) {
@@ -32,7 +32,8 @@ if (!empty($_POST)) {
             // $_POST['commentaire'],
          $_POST['dates'],
             $_POST['idTech'],
-            $_POST['idCommande']
+            $_POST['idCommande'],
+            $_POST['produit']
         );
         //   echo $userID;
      
@@ -75,10 +76,10 @@ $techs = $techStatement->fetchAll();
         <input type="text" name="idTech" class="form-control" value="<?= $idTech; ?>">
     </div>
 
-    <!-- <div class="form-group">
-        <label>Commentaire</label>
-        <input type="text" name="Commentaire" class="form-control" value="<?= $Commentaire; ?>">
-    </div> -->
+    <div class="form-group">
+        <label>ID du produit défectueux</label>
+        <input type="text" name="produit" class="form-control" value="<?= $produit; ?>">
+    </div>
   
 
 

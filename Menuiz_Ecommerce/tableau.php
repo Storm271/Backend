@@ -21,30 +21,28 @@ require __DIR__ .'/Model/tableauModel.php';
     </head>
     <body>
 
-<br />
+
 <div class="container">
 
-<br />
-<div class="row">
 
-<br />
 <h2>tableau retours S.A.V</h2>
-<p>
 
+
+
+<div>
+<a class="btn btn-success" href="creationDossier.php">Nouveau Dossier</a>
 </div>
-<p>
 
 
-<br />
 <div class="row">
   
-<br />
+
 <div class="table-responsive">
 
-<br />
+
 <table class="table table-hover table-bordered">
 
-<br />
+
 <thead>
 
 <th>N° Dossier</th>
