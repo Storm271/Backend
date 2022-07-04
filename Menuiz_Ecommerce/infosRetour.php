@@ -1,4 +1,6 @@
-
+<!-- //
+//FAIT PAR PIERRE
+/ -->
 
 <?php
 require_once __DIR__ . '/Include/init.php';
@@ -9,21 +11,6 @@ $produitStatement=$produitModel->RecupProduit($_GET['id']);
 $produit = $produitStatement->fetchAll();
 
 
-//  $id = null; if (!empty($_GET['PRD_ID'])) {
-//      $id = $_REQUEST['PRD_ID'];
-//  } if (null == $id) {
-//      header("location:tableau.php");
-//  } else {
-//      //on lance la connection et la requete
-//      RecupInfo();
-//  }
-
-
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,145 +22,160 @@ $produit = $produitStatement->fetchAll();
 
     <body>
 
-<br />
+
 <div class="container">
 
 
-<br />
+
 <div class="span10 offset1">
 
-<br />
+
 <div class="row">
 
-<br />
-<h3>Edition</h3>
-<p>
+
+<h2>Edition</h2>
+<br>
+<br>
+<br>
+<br>
 
 </div>
-<p>
 
 
-
-<br />
 <div class="form-horizontal" >
 
-<br />
+
 <div class="control-group">
 <label class="control-label">N° de dossier</label>
 
-<br />
+
 <div class="controls">
 <label class="checkbox">
 <?php
  echo '<p class="description">'.$produit[0]['SVF_ID'].'</p>'; ?>
 </label>
 </div>
-<p>
+
 
 </div>
-<p>
 
 
-<br />
+
+
 <div class="control-group">
 <label class="control-label">Status</label>
 
-<br />
+
 <div class="controls">
 <label class="checkbox">
 <?php  echo '<p class="description">'.$produit[0]['SVL_STATUS'].'</p>'; ?>
 </label>
 </div>
-<p>
+
 
 </div>
-<p>
 
 
-<br />
+
+
 <div class="control-group">
 <label class="control-label">Date de Création</label>
 
-<br />
 <div class="controls">
 <label class="checkbox">
 <?php  echo '<p class="description">'.$produit[0]['SVF_CREATIONTIME'].'</p>'; ?>
 </label>
 </div>
-<p>
+
 
 </div>
-<p>
 
 
-<br />
+
 <div class="control-group">
 <label class="control-label">N° de commande</label>
 
-<br />
+
 <div class="controls">
 <label class="checkbox">
 <?php  echo '<p class="description">'.$produit[0]['OHR_NUMBER'].'</p>'; ?>
 </label>
 </div>
-<p>
+
 
 </div>
 
-<p>
 
 
-<br />
+
+
 <div class="control-group">
 <label class="control-label">N° Produit</label>
 
-<br />
+
 <div class="controls">
 <label class="checkbox">
 <?php
 echo '<p class="description">'.$produit[0]['PRD_DESCRIPTION'].'</p>'; ?>
 </label>
 </div>
-<p>
+
 
 </div>
-<p>
 
-<br />
+
+
 <div class="control-group">
 <label class="control-label">Nom du technicien en charge</label>
 
-<br />
+
 <div class="controls">
 <label class="checkbox">
 <?php
 echo '<p class="description">'.$produit[0]['nom'].'</p>'; ?>
 </label>
 </div>
-<p>
+
+
 
 </div>
-<p>
 
 
-<br />
+
+
+<div class="control-group">
+<label class="control-label">Commentaire du technicien</label>
+
+
+<div class="controls">
+<label class="checkbox">
+<?php  echo '<p class="description">'.$produit[0]['SVF_COMM'].'</p>'; ?>
+</label>
+</div>
+
+
+</div>
+
+
+
+
 <div class="form-actions">
 <a class="btn btn-secondary" href="tableau.php">Back</a>
 </div>
-<p>
+
+
+
+
+</div>
+
+
+</div>
 
 
 
 </div>
-<p>
-
-</div>
-<p>
 
 
-</div>
-<p>
-<!-- /container -->
 <?php require __DIR__ . '/layout/bottom.php'; ?>
     </body>
 </html>

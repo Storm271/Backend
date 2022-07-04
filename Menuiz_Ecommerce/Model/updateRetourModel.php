@@ -1,3 +1,8 @@
+<!-- //
+//FAIT PAR PIERRE
+/ -->
+
+
 <?php
 
 class ModeleUpdateRetour
@@ -11,30 +16,27 @@ class ModeleUpdateRetour
 
 
 
-    public function updateRetour($statu, $identifiant, $commentaire)
+    public function updateRetour($statu, $identifiant, $commentaire, $idsvf)
     {
         $this->connexion();
         $query = "UPDATE t_d_savfile_svf 
-        SET SVL_STATUS = :statu,
-        Usr_ID = :id ,
-        SVF_COMM = :commentaire
-        where SVF_ID= 1"
-;
+       SET Usr_ID = ".$identifiant." ,
+        SVF_COMM = :commentaire, 
+        SVL_ID = (SELECT SVL_ID from t_d_savdetails_svl WHERE  SVL_STATUS = :statu)
+        where SVF_ID= ".$idsvf.";"
+        ;
+
+        echo $query;
+
 
         $stmt = $this->idc->prepare($query);
         $stmt->execute([
             ':statu' => $statu,
-            ':id' => $identifiant,
             ':commentaire' => $commentaire
         ]);
+        return $stmt;
     }
     
-    
-
-
-
-
-
     public function RecupProduit($id)
     {
         $this->connexion();
@@ -42,7 +44,7 @@ class ModeleUpdateRetour
     join t_d_savfile_svf on t_d_savfile_svf.Usr_ID = t_d_user_usr.Usr_ID
     join t_d_savdetails_svl on t_d_savdetails_svl.SVL_ID = t_d_savfile_svf.SVL_ID
     join t_d_orderheader_ohr on t_d_orderheader_ohr.OHR_ID = t_d_savfile_svf.OHR_ID 
-    where SVF_Product= ".$id."");
+    where SVF_ID= ".$id."");
         $res->execute();
         return $res;
     }
@@ -59,6 +61,24 @@ class ModeleUpdateRetour
     {
         $this->connexion();
         $res = $this->idc->prepare("SELECT  Usr_ID FROM t_d_savfile_svf");
+        $res->execute();
+        return $res;
+    }
+}
+
+class ModeleDelete
+{
+    private $idc;
+    private function connexion()
+    {
+        $this->idc = new PDO("mysql:host=localhost;  dbname=menuiz2", 'root', '');
+    }
+    
+    //Fonction pour afficher tous les produits
+    public function deleteFolder($idsvf)
+    {
+        $this->connexion();
+        $res = $this->idc->prepare("DELETE FROM t_d_savfile_svf  where SVF_ID= ".$idsvf.";");
         $res->execute();
         return $res;
     }

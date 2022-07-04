@@ -27,16 +27,6 @@ if (!empty($_POST)) {
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors[] = "L'email est pas valide";
     } else {
-        
-      
-        
-        // test de l'unicité de l'adresse en bdd
-        // $query = 'SELECT count(*) FROM T_D_USER_USR WHERE USR_MAIL = :email';
-        // $stmt = $pdo->prepare($query);
-        
-        // $stmt ->execute([':email' => $_POST['email']]);
-        // $nb = $stmt->fetchColumn();
-        
         $nb=$userM->RecupCountUsers($_POST['email']);
 
         if ($nb != 0) {

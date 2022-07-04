@@ -366,7 +366,7 @@ footer {
     width: 40%;
 }
 
-/* SOFIANE A PARTIR D'ICI */
+
 
 .adminPage {
     display: flex;
@@ -375,15 +375,7 @@ footer {
     margin: 0 2%;
 }
 
-.container {
-    display: flex;
-    width: 95%;
-    margin-left: 5%;
-    margin-top: 5%;
-   
-  justify-content: center;
-    
-}
+
 .container2 {
     display: flex;
     width: 95%;
@@ -713,4 +705,20 @@ div.image .selected {
 }
 .form-btn-group{
     margin-right: 5%;
+}
+
+#nouveauDoss{
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.control-label{
+color: black;
+font-weight: bold;
+}
+
+.separation{
+    height: 270px;;
+}
+footer{
+    bottom: 0;
 }

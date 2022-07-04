@@ -69,6 +69,27 @@ function isUserAdmin()
     return isUserConnected()
         && $_SESSION['utilisateur']['role'] == 'ADMIN';
 }
+
+
+
+
+
+function isUserTechHotline()
+{
+    return isUserConnected()
+        && $_SESSION['utilisateur']['role'] == 'Technicien Hotline';
+}
+
+function isUserTechSAV()
+{
+    return isUserConnected()
+        && $_SESSION['utilisateur']['role'] == 'Technicien SAV';
+}
+
+
+
+
+
 function isUserVisitor()
 {
     return isUserConnected()
@@ -80,14 +101,13 @@ function adminSecurity()
     if (!isuserAdmin() && !isUserVisitor()) {
         if (!isUserConnected()) {
             header('location: ' . RACINE_WEB . 'connexion.php');
-        } else {
-            header('HTTP/1.1 403 Forbidden');
-            echo "Vous n'avez pas le droit d'acceder à cette page";
         }
 
         die;
     }
 }
+
+
 //region 'Panier'
 function prixFR($prix)
 {

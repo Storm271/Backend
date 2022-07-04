@@ -1,3 +1,7 @@
+<!-- //
+//FAIT PAR PIERRE
+/ -->
+
 
 <?php
 require_once __DIR__ . '/Include/init.php';
@@ -6,6 +10,28 @@ require __DIR__ .'/Model/updateRetourModel.php';
 $produitModel=new ModeleUpdateRetour(0);
 $produitStatement=$produitModel->RecupProduit($_GET['id']);
 $produit = $produitStatement->fetchAll();
+techSavSecurity();
+
+
+
+
+
+
+function update()
+{
+    if ($_SESSION['utilisateur']['role'] == 'Technicien SAV') {
+        header('location: updateRetour.php');
+    } else {
+        header('HTTP/1.1 403 Forbidden');
+        echo "Vous n'avez pas le droit d'acceder à cette page";
+    }
+};
+
+
+
+
+
+
 
 
 
@@ -21,7 +47,7 @@ $produit = $produitStatement->fetchAll();
 
      // On assigne nos valeurs
      $status = $_POST["statu"];
-     $identifiant = $_POST["id"];
+     $identifiant = $_POST["idt"];
      $commentaire = $_POST["commentaire"];
    
      // On verifie que les champs sont remplis
@@ -39,17 +65,10 @@ $produit = $produitStatement->fetchAll();
          $valid = false;
      }
 
-
-
-
-
-
-
-
      // mise à jour des donnés
      if ($valid) {
          $updateModel = new ModeleUpdateRetour();
-         $updateStatement = $updateModel->updateRetour($_POST['statu'], $_POST['id'], $_POST['commentaire']);
+         $updateStatement = $updateModel->updateRetour($_POST['statu'], $_POST['idt'], $_POST['commentaire'], (int)$_GET['id']);
          $update = $updateStatement->fetchAll();
              
          header("Location: tableau.php");
@@ -70,45 +89,40 @@ $produit = $produitStatement->fetchAll();
 <body>
 
 <form method="post">
-<br />
+
 <div class="container">
 
-<br />
+<h2>Modifier un contact</h2>
+<br>
+<br>
+<br>
+<br>
 <div class="row">
 
-<br />
-<h3>Modifier un contact</h3>
-<p>
-
-<p>
 
 
 
-<br />
 <div class="form-horizontal" >
 
-<br />
+
 <div class="control-group">
 <label class="control-label">N° de dossier</label>
 
-<br />
+
 <div class="controls">
 <label class="checkbox">
 <?php
  echo '<p class="description">'.$produit[0]['SVF_ID'].'</p>'; ?>
 </label>
 </div>
-<p>
+
 
 </div>
-<p>
 
-
-<br />
 <div class="control-group">
 <label class="control-label">Status</label>
 
-<br />
+
 <div class="controls">
 <label class="checkbox">
 <?php
@@ -127,79 +141,75 @@ echo '</select>';
 
 </label>
 </div>
-<p>
+
 
 </div>
-<p>
 
 
-<br />
+
+
 <div class="control-group">
 <label class="control-label">Date de Création</label>
 
-<br />
+
 <div class="controls">
 <label class="checkbox">
 <?php  echo '<p class="description">'.$produit[0]['SVF_CREATIONTIME'].'</p>'; ?>
 </label>
 </div>
-<p>
+
 
 </div>
-<p>
 
 
-<br />
+
 <div class="control-group">
 <label class="control-label">N° de commande</label>
 
-<br />
 <div class="controls">
 <label class="checkbox">
 <?php  echo '<p class="description">'.$produit[0]['OHR_NUMBER'].'</p>'; ?>
 </label>
 </div>
-<p>
+
 
 </div>
 
-<p>
 
 
-<br />
+
+
 <div class="control-group">
 <label class="control-label">N° Produit</label>
 
-<br />
+
 <div class="controls">
 <label class="checkbox">
 <?php
 echo '<p class="description">'.$produit[0]['SVF_Product'].'</p>'; ?>
 </label>
 </div>
-<p>
+
 
 </div>
-<p>
 
-<br />
+
+
 <div class="control-group">
 <label class="control-label">Nom du technicien en charge</label>
 
-<br />
+
 <div class="controls">
 <label class="checkbox">
 <?php
 echo '<p class="description">'.$produit[0]['nom'].'</p>'; ?>
 </label>
 </div>
-<p>
 
-<br />
 <div class="control-group">
 <label class="control-label">Commentaire Technicien</label>
 
-<br />
+
 <div class="controls">
 <label class="checkbox">
 
@@ -213,17 +223,17 @@ echo '<p class="description">'.$produit[0]['nom'].'</p>'; ?>
 //  size="10">'.$produit[0]['SVF_COMM'].'>';?>
 </label>
 </div>
-<p>
+
 
 
 </div>
-<p>
 
-<br />
+
+
 <div class="control-group">
 <label class="control-label">Id Technicien</label>
 
-<br />
+
 <div class="controls">
 <label class="checkbox">
 <?php
@@ -232,7 +242,7 @@ $techStatement = $techModel->RecupTech();
 $techs = $techStatement->fetchAll();
 ?>
 
-<select value="<?php echo $identifiant; ?>" name="id" id="tech-select">
+<select value="<?php echo $identifiant; ?>" name="idt" id="tech-select">
 <?php
 foreach ($techs as $tech) {
     echo'<option >' . $tech['Usr_ID'] . '</option>';
@@ -243,21 +253,19 @@ echo '</select>';
 </label>
 </div>
 
-<br />
+
 <div class="form-actions">
         <input type="submit" class="btn btn-success" name="submit" value="submit">
         <a class="btn" href="tableau.php">Retour</a>
 </div>
-<p>
-
-
-<p>
-
 
 
 </div>
-<p>
 
 </form>
+</div>
+</div>
+</div>
+<?php require __DIR__ . '/layout/bottom.php'; ?>
 </body>
 </html>

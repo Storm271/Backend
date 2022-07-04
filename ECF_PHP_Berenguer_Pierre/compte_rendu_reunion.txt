@@ -1,0 +1,77 @@
+Compte rendu des daily meetings du 27/06 au 04/07:
+----------------------------------------------------------------------------------------------------------
+
+Résumé réunion du 27/06:
+	-Première réunion avec le product owner 
+	-Définition des besoins prioritaires avec le PO
+	-Organisation u planning de travail
+	-répartition des taches entre les membres de la scrum team
+
+velocité: 96h au total
+temps de travail réel: 85h30
+
+Reparties comme ceci:
+	-Création de tables:2h
+	-Insertion dans les tables:2h
+	-création des modeles: 21h
+	-Page recherche commande:2h
+	-Interface dossier:2h
+	-Tableau:2h
+	-Responsive:12.5h
+	-Interface S.A.V/hotline:20h
+	-Marge:20h
+
+Hierarchisation des besoins:
+	1.Céation de la base des données
+	2.Création dossier S.A.V/Profil techniciens Hotline / S.A.V
+	3.Historique du dossier(date, commentaire, login IP)
+-----------------------------------------------------------------------------------------------------------
+
+- Compte rendu du daily meeting du 28/06 du groupe mystere:
+Avancement:
+	-BDD
+	-page recherche et dossier 
+	-tableau
+En cours à terminer aujourd'hui:
+	-Insertion des tables 
+	-Tableau 
+	-Fonctionnalités de la page recherche/dossier
+Taches terminées:
+	-création des tables 
+	-interface recherche et dossier
+
+-----------------------------------------------------------------------------------------------------------
+Compte rendu du  daily  meeting du 29/06:
+
+Avancement du projet:
+
+fini: 
+- modification de la bdd
+- recherche par nom 
+- interface dossier
+- creation tableau / modèles associés 
+
+En cours: 
+
+- creation profils et restrictions techniciens SAV et hotline
+- fonction update du dossier SAV 
+- recherche multirequête
+
+------------------------------------------------------------------------------------------------------------
+
+
+
+-------------------------------------------------------------------------------------------------------------
+Compte rendu du  daily  meeting du 1er/07
+
+Avancement du projet:
+Terminé: 
+modification bdd, 
+création tableau / modèle associé
+creation des profils et restriction SAV et Hotline tech
+ticket SAV
+
+En cours: 
+-creation modele kit
+detail sav 
+historique SAV

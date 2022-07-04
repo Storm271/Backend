@@ -7,7 +7,8 @@ function myFunction() {
     confirm("Press a button!");
 }
 </script> 
-<footer>
+<div class="separation"></div>
+<footer class="absolute-bottom">
     <p class="mention">Mentions légales</p>
     <p class="copy">Copyright ©</p>
     <p class="mail">Mail : support@exemple.com</p>

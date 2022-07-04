@@ -1,7 +1,15 @@
+<!-- //
+//FAIT PAR PIERRE
+/ -->
+
+
 <?php
 require_once __DIR__ . '/Include/init.php';
 require __DIR__ . '/layout/top.php';
 require __DIR__ .'/Model/tableauModel.php';
+hotlineTechSecurity();
+techSavSecurity();
+
 ?>
 
 <html>
@@ -25,13 +33,16 @@ require __DIR__ .'/Model/tableauModel.php';
 <div class="container">
 
 
-<h2>tableau retours S.A.V</h2>
+<h2>Tableau retours S.A.V</h2>
+<br>
+<br>
+<br>
 
 
-
-<div>
+<div id="nouveauDoss">
 <a class="btn btn-success" href="creationDossier.php">Nouveau Dossier</a>
 </div>
+<br>
 
 
 <div class="row">
@@ -46,21 +57,23 @@ require __DIR__ .'/Model/tableauModel.php';
 <thead>
 
 <th>N° Dossier</th>
-<p>
+
 <th>Status</th>
-<p>
+
 <th>Date de création</th>
-<p>
+
 <th>N° de commande</th>
-<p>
+
 <th>N° Produit</th>
-<p>
+
 <th>Technicien en charge</th>
-<p>
+
 <th>Détail</th>
-<p>
+
 <th>Modification</th>
-<p>
+
+<th>Suppression</th>
+
 
 
 </thead>
@@ -78,35 +91,35 @@ $tableaux = $tableauStatement->fetchAll();
  //on formule notre requete
  foreach ($tableaux as $tableau) {
      //on cree les lignes du tableau avec chaque valeur retournée
-     echo '<br /><tr>';
-     echo'<td>' . $tableau['SVF_ID'] . '</td><p>';
-     echo'<td data-status="{{'. $tableau['SVL_STATUS'] .'}}" class="status">' . $tableau['SVL_STATUS'] . '</td><p>';
-     echo'<td>' . $tableau['SVF_CREATIONTIME'] . '</td><p>';
-     echo'<td>' . $tableau['OHR_NUMBER'] . '</td><p>';
-     echo'<td>' . $tableau['SVF_Product'] . '</td><p>';
-     echo'<td>' . $tableau['nom'] . '</td><p>';
+     echo '<tr>';
+     echo'<td>' . $tableau['SVF_ID'] . '</td>';
+     echo'<td data-status="{{'. $tableau['SVL_STATUS'] .'}}" class="status">' . $tableau['SVL_STATUS'] . '</td>';
+     echo'<td>' . $tableau['SVF_CREATIONTIME'] . '</td>';
+     echo'<td>' . $tableau['OHR_NUMBER'] . '</td>';
+     echo'<td>' . $tableau['SVF_Product'] . '</td>';
+     echo'<td>' . $tableau['nom'] . '</td>';
      echo '<td>';
-     echo '<a class="btn btn-secondary" href="infosRetour.php?id=' . $tableau['SVF_Product'] . '">Read</a>';// un autre td pour le bouton d'edition
-     echo '</td><p>';
+     echo '<a class="btn btn-secondary" href="infosRetour.php?id=' . $tableau['SVF_ID'] . '">Read</a>';// un autre td pour le bouton d'edition
+     echo '</td>';
      echo '<td>';
-     echo '<a class="btn btn-success" href="updateRetour.php?id=' . $tableau['SVF_Product'] . '">Update</a>';// un autre td pour le bouton d'update
-     echo '</td><p>';
-     //  echo'<td>';
-    //  echo '<a class="btn btn-danger" href="delete.php?id=' . $row['id'] . ' ">Delete</a>';// un autre td pour le bouton de suppression
-    //  echo '</td><p>';
-    //  echo '</tr><p>';
+     echo '<a class="btn btn-success" href="updateRetour.php?id=' . $tableau['SVF_ID'] . '">Update</a>';// un autre td pour le bouton d'update
+     echo '</td>';
+     echo'<td>';
+     echo '<a class="btn btn-danger" href="delete.php?id=' . $tableau['SVF_ID'] . ' ">Delete</a>';// un autre td pour le bouton de suppression
+     echo '</td>';
+     echo '</tr>';
  }
 ?>    
 </tbody>
-<p>
+
 </table>
-<p>
+
 </div>
-<p>
+
 </div>
-<p>
+
 </div>
-<p>
+
 <?php
 require __DIR__ . '/layout/bottom.php';
 ?>

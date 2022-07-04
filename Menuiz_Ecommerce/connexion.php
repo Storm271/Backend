@@ -43,7 +43,34 @@ if (!empty($_POST)) {
                 $_SESSION['utilisateur']['nom']=$utilisateur[0]['USR_LASTNAME'];
                 $_SESSION['utilisateur']['prenom'] =$utilisateur[0]['USR_FIRSTNAME'];
                 $_SESSION['utilisateur']['role'] =$utilisateur[0]['role'];
-                header('Location: index.php');
+
+
+
+
+
+
+
+//
+                // FAIT PAR PIERRE
+//
+
+
+
+
+                if ($_SESSION['utilisateur']['role'] == 'Technicien Hotline' || $_SESSION['utilisateur']['role'] == 'Technicien SAV') {
+                    header('location: tableau.php');
+                } else {
+                    header('Location: index.php');
+                }
+
+
+//
+                // FAIT PAR PIERRE
+//
+
+
+
+
                 die;
             }
         }

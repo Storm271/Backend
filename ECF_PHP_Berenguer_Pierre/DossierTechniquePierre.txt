@@ -1,0 +1,24 @@
+Pour ce projet j'ai : 
+
+
+- Créé la page "tableau.php" affichant tous les dossiers S.A.V et ses fonctionalités permettant de voir le détail de chaque dossier avec des informations en plus,
+Modifier le dossier, supprimer le dossier, créer un nouveau dossier. 
+
+- Créé la page "infosRetour" via les fichiers "infosRetour" et "infosRetourModel" permettant d'avoir le détail du dossier ciblé
+
+- Créé la page "updateRetour" via les fichiers "updateRetour" et "updateRetourModel" permettant de modifier les informations du dossier ciblé
+et de changer en direct les informations dans la base de donnée.
+
+- Créé la page "creationDossier" via les fichiers "creationDossier" et "creationDossierModel" permettant de créer un nouveau dossier et insérer
+en direct les informations dans la base de données.
+
+- Créé la page "delete" via les fichiers "delete" et "updateRetourModel" permettant de supprimer le dossier ciblé sur l'interface et 
+dans la base de données
+
+- Géré la route de connexion selon le type d'utilisateur (Envoyer l'utilisateur "Technicien SAV" et "Technicien Hotline" sur l'interface
+des dossiers directement plutôt que dans l'index).
+
+- CSS
+
+
+BERENGUER Pierre

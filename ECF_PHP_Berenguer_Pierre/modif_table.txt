@@ -1,0 +1,76 @@
+
+Sur la base de Menuiz,
+modification faite par Magali 
+
+
+CREATE TABLE t_d_savfile_svf (
+   SVF_ID int AUTO_INCREMENT PRIMARY KEY,
+   SVF_COMM VARCHAR (500),
+   SVF_CREATIONTIME DATETIME,
+    SVF_IP varchar (10),
+    USR_ID int(11),
+   OHR_ID int(11),
+    SVL_ID int(11),
+    DGC_ID int(11),
+    UTY_ID int(11),
+    FOREIGN key (OHR_ID) REFERENCES t_d_orderheader_ohr(OHR_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+   FOREIGN key (SVL_ID) REFERENCES t_d_savdetails_svl(SVL_ID) ON DELETE CASCADE on UPDATE CASCADE,
+    FOREIGN key (DGC_ID) REFERENCES t_d_diagnostic_dgc(DGC_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (USR_ID) REFERENCES t_d_user_usr(USR_ID) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN key (UTY_ID) REFERENCES t_d_usertype_uty(UTY_ID) ON DELETE CASCADE on UPDATE CASCADE
+);
+
+create TABLE t_d_stockmovement_smt
+(SMT_ID int AUTO_INCREMENT PRIMARY KEY, 
+ SMT_PLACE varchar (20));
+
+create table t_d_savdetails_svl 
+( SVL_ID int(11) AUTO_INCREMENT PRIMARY KEY,
+ SVL_STATUS varchar (50)
+ );
+
+CREATE TABLE t_d_historySAV_hav
+(HAV_ID int(11) PRIMARY KEY,
+SVL_ID int(11),
+ SVF_ID int (11),
+ OHR_ID int (11),
+ FOREIGN key (SVL_ID) REFERENCES t_d_savdetails_svl(SVL_ID),
+ FOREIGN KEY (SVF_ID) REFERENCES t_d_savfile_svf(SVF_ID),
+ foreign KEY (OHR_ID) REFERENCES t_d_orderheader_ohr(OHR_ID)
+);
+
+create table t_d_diagnostic_dgc (
+DGC_ID int (11),
+    DGC_STATUS varchar (50));
+
+INSERT INTO `t_d_diagnostic_dgc`(`DGC_ID`, `DGC_STATUS`) VALUES (1,'NPAI'),(2,'NP'),(3,'EC'),(4,'EP'),(5,'SAV');
+
+INSERT INTO `t_d_savdetails_svl`(`SVL_ID`, `SVL_STATUS`) VALUES (1,'non traité'), (2,'en cours de traitement'), (3,'traité');
+
+
+INSERT INTO `t_d_stockmovement_smt`(`SMT_ID`, `SMT_PLACE`) VALUES (1,'Stock principal'), (2,'Stock SAV'),(3,'Rebus');
+
+
+INSERT INTO `t_d_usertype_uty`(`UTY_ID`, `UTY_TYPE`) VALUES (3, 'Technicien Hotline'), (4,'Technicien SAV').
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

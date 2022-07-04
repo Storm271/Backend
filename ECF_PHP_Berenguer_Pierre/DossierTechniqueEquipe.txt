@@ -1,0 +1,18 @@
+Dossier Technique d’équipe
+
+
+
+Ce qui a été fait durant ce sprint : 
+
+-	Modification de la base de donnée et inserts
+-	Interface dossier/ modèle associé 
+-	Détail dossiers / modèle associé 
+-	Création dossiers/ modèle associé 
+-	Modification dossiers/ modèle associé 
+-	Suppression dossiers/ modèle associé 
+-	Création profils et restrictions techniciens SAV et Hotline
+
+
+Ce qui n’a pas été fait durant le sprint :
+-	Recherche multi requête
+-	Historique SAV 
